@@ -1,6 +1,6 @@
 const Cart = require("../models/Cart");
 
-// Get user cart
+
 const getCart = async (req, res) => {
   try {
     const cart = await Cart.findOne({ userId: req.params.userId }).populate("cartItems.itemId");
@@ -11,7 +11,7 @@ const getCart = async (req, res) => {
   }
 };
 
-// Add item to cart
+
 const addToCart = async (req, res) => {
   const { userId, itemId, quantity } = req.body;
 
@@ -38,7 +38,7 @@ const addToCart = async (req, res) => {
   }
 };
 
-// Remove item from cart
+
 const removeFromCart = async (req, res) => {
   const { userId, itemId } = req.params;
   try {
@@ -53,7 +53,6 @@ const removeFromCart = async (req, res) => {
   }
 };
 
-// controllers/cartControllers.js
 
 const clearCart = async (req, res) => {
   const { userId } = req.params;
@@ -61,7 +60,7 @@ const clearCart = async (req, res) => {
     const cart = await Cart.findOne({ userId });
     if (!cart) return res.status(404).json({ message: "Cart not found" });
 
-    cart.cartItems = []; // Clear the cart
+    cart.cartItems = [];
     await cart.save();
 
     res.json({ message: "Cart cleared successfully" });
@@ -74,6 +73,7 @@ module.exports = {
   addToCart,
   getCart,
   removeFromCart,
-  clearCart,  
+  clearCart 
 };
 
+module.exports = { addToCart, getCart, removeFromCart, clearCart };

@@ -1,6 +1,5 @@
 const Item = require('../models/Item');
 
-// Get all items
 const getItems = async (req, res) => {
   try {
     const items = await Item.find();
@@ -10,7 +9,6 @@ const getItems = async (req, res) => {
   }
 };
 
-// Add item (optional - for admin or testing)
 const addItem = async (req, res) => {
   const { name, image, price, category, description } = req.body;
   try {
@@ -21,6 +19,5 @@ const addItem = async (req, res) => {
     res.status(500).json({ message: 'Error adding item', error: err.message });
   }
 };
-
 
 module.exports = { getItems, addItem };
